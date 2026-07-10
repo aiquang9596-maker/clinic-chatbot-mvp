@@ -2,12 +2,12 @@ FROM python:3.13-slim
 
 WORKDIR /app
 
-# Deps first for layer cache
-COPY requirements.txt .
+# Build context on Railway is repo root, so copy from backend/
+COPY backend/requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # App code
-COPY . .
+COPY backend/ ./
 
 # Create data dir (SQLite fallback; Railway uses Postgres via DATABASE_URL)
 RUN mkdir -p data
