@@ -3,9 +3,14 @@ import os, httpx, logging
 
 log = logging.getLogger(__name__)
 
-WA_TOKEN  = os.getenv("WHATSAPP_ACCESS_TOKEN", "")
-WA_PHONE  = os.getenv("WHATSAPP_PHONE_NUMBER_ID", "")
-MS_TOKEN  = os.getenv("MESSENGER_PAGE_ACCESS_TOKEN", "")
+
+def _clean_env(name: str) -> str:
+    return os.getenv(name, "").strip().strip('"').strip("'")
+
+
+WA_TOKEN  = _clean_env("WHATSAPP_ACCESS_TOKEN")
+WA_PHONE  = _clean_env("WHATSAPP_PHONE_NUMBER_ID")
+MS_TOKEN  = _clean_env("MESSENGER_PAGE_ACCESS_TOKEN")
 
 
 def send(channel: str, recipient_id: str, text: str) -> str | None:

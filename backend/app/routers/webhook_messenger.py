@@ -5,8 +5,14 @@ from fastapi import APIRouter, Request, Response, HTTPException, Query
 router = APIRouter(prefix="/webhook/messenger", tags=["messenger"])
 log = logging.getLogger(__name__)
 
-VERIFY_TOKEN = os.getenv("MESSENGER_VERIFY_TOKEN", "")
-APP_SECRET   = os.getenv("MESSENGER_APP_SECRET", "")
+
+def _clean_env(name: str) -> str:
+    """Read env var and strip surrounding quotes/spaces from platform UIs."""
+    return os.getenv(name, "").strip().strip('"').strip("'")
+
+
+VERIFY_TOKEN = _clean_env("MESSENGER_VERIFY_TOKEN")
+APP_SECRET   = _clean_env("MESSENGER_APP_SECRET")
 
 
 @router.get("")
