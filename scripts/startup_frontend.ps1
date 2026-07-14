@@ -2,8 +2,8 @@
 # Chỉ khởi động Frontend (Backend đã chạy trên Railway cloud)
 # Setup: xem README.md phần "Windows Startup"
 
-$frontendPath = "D:\2nd Brain\chatbot-mvp\frontend"
-$logPath = "D:\2nd Brain\chatbot-mvp\logs"
+$frontendPath = "D:\Projects\chatbot-mvp\frontend"
+$logPath = "D:\Projects\chatbot-mvp\logs"
 
 New-Item -ItemType Directory -Force -Path $logPath | Out-Null
 

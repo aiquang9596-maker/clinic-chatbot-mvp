@@ -128,7 +128,7 @@ MESSENGER_APP_SECRET=your_app_secret                # App → Settings → Basic
 3. Cập nhật webhook URL trong Meta dashboard với URL tunnel mới
 4. Gửi 1 tin nhắn test từ WhatsApp/Messenger
 5. Xem log backend: phải thấy `WA inbound` hoặc `Messenger inbound`
-6. Kiểm tra DB: `D:\2nd Brain\chatbot-mvp\backend\data\chatbot.db`
+6. Kiểm tra DB: `D:\Projects\chatbot-mvp\backend\data\chatbot.db`
 
 ---
 
