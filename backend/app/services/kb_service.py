@@ -1,12 +1,21 @@
-"""Knowledge base retrieval — SQLite FTS5 + metadata filter."""
+"""Knowledge base retrieval — SQLite FTS5 + metadata filter.
+
+ponytail: FTS5 only works against the SQLite file; on Postgres (DATABASE_URL
+not sqlite://) retrieval/setup are no-ops. Add a Postgres full-text path
+(tsvector or pg_trgm) when KB needs to run on Postgres.
+"""
 import sqlite3, os, logging
 
 log = logging.getLogger(__name__)
-DB_PATH = os.getenv("DATABASE_URL", "sqlite:///./data/chatbot.db").replace("sqlite:///", "")
+_RAW_URL = os.getenv("DATABASE_URL", "sqlite:///./data/chatbot.db")
+_IS_SQLITE = _RAW_URL.startswith("sqlite")
+DB_PATH = _RAW_URL.replace("sqlite:///", "")
 
 
 def retrieve(query: str, intent: str, service: str = None, top_k: int = 4) -> list[dict]:
     """Return top-k KB snippets relevant to the query + intent."""
+    if not _IS_SQLITE:
+        return []
     try:
         con = sqlite3.connect(DB_PATH)
         con.row_factory = sqlite3.Row
@@ -42,6 +51,8 @@ def retrieve(query: str, intent: str, service: str = None, top_k: int = 4) -> li
 
 def setup_fts(db_path: str = None):
     """Create FTS5 virtual table if missing. Run once at startup."""
+    if not _IS_SQLITE:
+        return
     path = db_path or DB_PATH
     con = sqlite3.connect(path)
     con.execute("""
