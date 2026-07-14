@@ -59,5 +59,5 @@ third parties for marketing purposes.</p>
 maintain business records, and can be deleted on request.</p>
 <h2>Contact</h2>
 <p>For questions or data deletion requests, contact us at
-<a href="mailto:tunguyen230495@gmail.com">tunguyen230495@gmail.com</a>.</p>
+<a href="mailto:tunq.dev@gmail.com">tunq.dev@gmail.com</a>.</p>
 </body></html>"""
