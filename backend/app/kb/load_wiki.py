@@ -10,7 +10,7 @@ from pathlib import Path
 from sqlalchemy.orm import Session
 from app.models.db import engine, KBSnippet
 
-VAULT_ROOT = Path(__file__).parents[4] / "agent_wiki_cosmetic_clinic"
+VAULT_ROOT = Path(os.getenv("VAULT_ROOT", r"D:\2nd Brain\agent_wiki_cosmetic_clinic"))
 
 # Map (relative path from vault root) → metadata defaults
 FILE_META = {
